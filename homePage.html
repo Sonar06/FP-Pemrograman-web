@@ -68,23 +68,23 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium">
-                    <li class="nav-item"><a class="nav-link active text-white" href="#">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Nasional</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Internasional</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Ekonomi</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Teknologi</a></li>
+                    <li class="nav-item"><a class="nav-link active text-danger" href="#">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nasional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Internasional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ekonomi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Teknologi</a></li>
                 </ul>
                 
                 <form class="d-flex ms-lg-3" role="search" onsubmit="handleSearch(event)">
                     <div class="input-group">
                         <input class="form-control rounded-start-pill" type="search" placeholder="Cari berita..." id="searchInput">
-                        <button class="btn btn-light rounded-end-pill" type="submit">
+                        <button class="btn btn-outline-danger rounded-end-pill" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
                 </form>
                 
-                <a href="login.html"class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>
+                <a href="#" class="btn btn-link text-decoration-none text-dark ms-2 fw-bold">Masuk</a>
             </div>
         </div>
     </nav>
@@ -93,15 +93,15 @@
         
         <h2 class="mb-4 border-start border-4 border-danger ps-3 fw-bold">Berita Utama</h2>
         
-        <div class="hero-section p-4 mb-5 shadow">
-            <div>
-                <span class="badge bg-danger mb-2">NASIONAL</span>
-                <h1 class="fw-bold display-6">Pembangunan Infrastruktur Hijau Menjadi Prioritas Utama Pembangunan Nasional</h1>
-                <div class="small text-light opacity-75 mt-2">
-                    <i class="bi bi-person-fill me-1"></i> Redaksi Utama &bull; 
-                    <i class="bi bi-calendar me-1"></i> Hari Ini
+        <div class="hero-section p-4 mb-5 shadow" id="heroSection" style="cursor:pointer;">
+            <a id="heroLink" href="#" class="stretched-link text-white text-decoration-none">
+                <span class="badge bg-danger mb-2" id="heroCategory"></span>
+                <h1 class="fw-bold display-6" id="heroTitle"></h1>
+                <div class="small opacity-75 mt-2 text-light">
+                    <i class="bi bi-person-fill me-1"></i> <span id="heroAuthor"></span> &bull; 
+                    <i class="bi bi-calendar me-1"></i> <span id="heroDate"></span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -113,63 +113,23 @@
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="position-relative">
-                        <img src="https://picsum.photos/800/600?random=1" class="card-img-top" alt="Berita 1">
-                        <span class="position-absolute top-0 start-0 badge bg-danger m-2">Ekonomi</span>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <small class="text-muted mb-2"><i class="bi bi-calendar3"></i> 12 Okt 2023</small>
-                        <h5 class="card-title fw-bold hover-danger"><a href="#" class="text-decoration-none text-dark">Indonesia Targetkan Pertumbuhan Ekonomi Digital 20%</a></h5>
-                        <p class="card-text text-secondary small line-clamp-3">Pemerintah optimis sektor ekonomi digital akan menjadi tulang punggung pemulihan ekonomi nasional dengan dukungan infrastruktur.</p>
-                        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Oleh Budi Santoso</small>
-                            <a href="#" class="text-danger text-decoration-none fw-bold small">Baca Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row g-4" id="newsContainer"></div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="position-relative">
-                        <img src="https://picsum.photos/800/600?random=2" class="card-img-top" alt="Berita 2">
-                        <span class="position-absolute top-0 start-0 badge bg-danger m-2">Olahraga</span>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <small class="text-muted mb-2"><i class="bi bi-calendar3"></i> 11 Okt 2023</small>
-                        <h5 class="card-title fw-bold"><a href="#" class="text-decoration-none text-dark">Timnas Garuda Siap Hadapi Turnamen Tingkat Asia</a></h5>
-                        <p class="card-text text-secondary small line-clamp-3">Persiapan matang telah dilakukan oleh pelatih dan pemain. Strategi baru akan diterapkan untuk menghadapi lawan tangguh.</p>
-                        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Oleh Rina Wijaya</small>
-                            <a href="#" class="text-danger text-decoration-none fw-bold small">Baca Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="position-relative">
-                        <img src="https://picsum.photos/800/600?random=3" class="card-img-top" alt="Berita 3">
-                        <span class="position-absolute top-0 start-0 badge bg-danger m-2">Teknologi</span>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <small class="text-muted mb-2"><i class="bi bi-calendar3"></i> 10 Okt 2023</small>
-                        <h5 class="card-title fw-bold"><a href="#" class="text-decoration-none text-dark">Inovasi Pertanian Modern: Petani Gunakan Drone</a></h5>
-                        <p class="card-text text-secondary small line-clamp-3">Penggunaan teknologi drone untuk penyiraman dan pemupukan terbukti meningkatkan efisiensi hasil panen hingga 40%.</p>
-                        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Oleh Dimas Anggara</small>
-                            <a href="#" class="text-danger text-decoration-none fw-bold small">Baca Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1"><i class="bi bi-chevron-left"></i></a>
+                </li>
+                <li class="page-item active"><a class="page-link bg-danger border-danger" href="#">1</a></li>
+                <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+                <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link text-dark" href="#"><i class="bi bi-chevron-right"></i></a>
+                </li>
+            </ul>
+        </nav>
 
-       
     </div>
 
     <footer class="bg-dark text-white pt-5 pb-3 mt-5">
@@ -181,8 +141,8 @@
                     <div class="d-flex gap-3">
                         <a href="#" class="text-light"><i class="bi bi-facebook fs-5"></i></a>
                         <a href="#" class="text-light"><i class="bi bi-twitter-x fs-5"></i></a>
-                        <a href="https://www.instagram.com/raiyhan_rr/" class="text-light"><i class="bi bi-instagram fs-5"></i></a>
-                        <a href="https://www.instagram.com/dvn.ad/" class="text-light"><i class="bi bi-youtube fs-5"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-youtube fs-5"></i></a>
                     </div>
                 </div>
 
@@ -250,5 +210,6 @@
             });
         });
     </script>
+    <script src="script1.js"></script>
 </body>
 </html>
