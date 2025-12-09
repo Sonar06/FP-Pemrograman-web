@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembangunan Infrastruktur Hijau - BeritaNusantara</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        /* --- STYLE BAWAAN (SAMA DENGAN BERANDA) --- */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f7f7f7;
+        }
+        
+        /* Navbar Brand Span */
+        .navbar-brand span {
+            color: #f1f1f1;
+        }
+
+        /* --- STYLE KHUSUS HALAMAN DETAIL --- */
+        .article-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #212529;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Sidebar Item */
+        .related-news-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .related-news-item:hover a {
+            color: #dc3545 !important; /* Merah saat hover */
+        }
+
+        /* Comment Section */
+        .comment-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" style="background-color: #b91c1c;">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <span>inIBerita</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium">
+                    <li class="nav-item"><a class="nav-link text-white" href="homePage.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active text-white fw-bold" href="#">Nasional</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Internasional</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Ekonomi</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Teknologi</a></li>
+                </ul>
+                
+                <form class="d-flex ms-lg-3" role="search" onsubmit="handleSearch(event)">
+                    <div class="input-group">
+                        <input class="form-control rounded-start-pill" type="search" placeholder="Cari berita..." id="searchInput">
+                        <button class="btn btn-light rounded-end-pill" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <a href="login.html" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-danger">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-danger">Nasional</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Detail Berita</li>
+            </ol>
+        </nav>
+
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <article class="bg-white p-4 rounded shadow-sm border mb-5">
+                    <span class="badge bg-danger mb-2">NASIONAL</span>
+                    <h1 class="fw-bold mb-3 display-5">Pembangunan Infrastruktur Hijau Menjadi Prioritas Utama Pembangunan Nasional</h1>
+                    
+                    <div class="d-flex align-items-center mb-4 article-meta border-bottom pb-3">
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-person-circle fs-4 me-2 text-secondary"></i>
+                            <div>
+                                <span class="fw-bold text-dark">Redaksi Utama</span><br>
+                                <span>Jurnalis Senior</span>
+                            </div>
+                        </div>
+                        <div class="text-secondary border-start ps-3 ms-3">
+                            <i class="bi bi-calendar3 me-1"></i> 13 Oktober 2023 <br>
+                            <i class="bi bi-clock me-1"></i> 14:30 WIB
+                        </div>
+                    </div>
+
+                    <img src="https://picsum.photos/1200/800?random=10" class="img-fluid rounded mb-4 w-100" alt="Ilustrasi Infrastruktur">
+                    <p class="text-muted small text-center fst-italic mt-1">Ilustrasi pembangunan infrastruktur ramah lingkungan. (Foto: Dok. BeritaNusantara)</p>
+
+                    <div class="article-body mt-4">
+                        <p><strong>JAKARTA, inIBerita</strong> - Pemerintah secara resmi mengumumkan bahwa pembangunan infrastruktur berbasis lingkungan atau <em>green infrastructure</em> akan menjadi fokus utama dalam Rencana Pembangunan Jangka Menengah Nasional tahun ini. Langkah ini diambil sebagai respons terhadap perubahan iklim global yang semakin mengkhawatirkan.</p>
+
+                        <p>Menteri Perencanaan Pembangunan Nasional menyatakan bahwa setiap proyek strategis nasional kini wajib menyertakan Analisis Mengenai Dampak Lingkungan (AMDAL) yang lebih ketat. "Kita tidak hanya membangun beton, tapi kita membangun masa depan yang berkelanjutan untuk anak cucu kita," ujarnya dalam konferensi pers di Jakarta, Senin pagi.</p>
+
+                        <p>Beberapa proyek percontohan akan segera dimulai di lima provinsi besar, mencakup pembangunan pembangkit listrik tenaga surya, sistem pengelolaan limbah terpadu, dan perluasan ruang terbuka hijau di kawasan perkotaan. Anggaran sebesar 50 Triliun Rupiah telah disiapkan untuk tahap awal implementasi kebijakan ini.</p>
+
+                        <h4 class="fw-bold mt-4 mb-3">Tantangan dan Harapan</h4>
+                        
+                        <p>Meskipun mendapat sambutan positif, para pengamat ekonomi mengingatkan bahwa transisi ke infrastruktur hijau membutuhkan biaya awal yang sangat besar. Selain itu, kesiapan sumber daya manusia di daerah juga menjadi tantangan tersendiri yang harus segera diatasi oleh pemerintah pusat.</p>
+
+                        <p>Namun, optimisme tetap tinggi. Dengan dukungan investasi asing dan komitmen kuat dari pemerintah, Indonesia diharapkan dapat menjadi pemimpin dalam pembangunan berkelanjutan di kawasan Asia Tenggara pada tahun 2030 mendatang.</p>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="fw-bold me-2"><i class="bi bi-tags-fill text-danger"></i> Tag:</span>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Infrastruktur</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Lingkungan</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none border me-1">Pemerintah</a>
+                    </div>
+                </article>
+
+                <div class="bg-white p-4 rounded shadow-sm border" id="kolom-komentar">
+                    <h4 class="fw-bold mb-4 border-start border-4 border-danger ps-3">Komentar (<span id="commentCount">2</span>)</h4>
+
+                    <div class="mb-5">
+                        <div class="card bg-light border-0">
+                            <div class="card-body">
+                                <h6 class="mb-3">Tulis Komentar:</h6>
+                                <form onsubmit="postComment(event)">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="commentName" placeholder="Nama Anda" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="commentText" rows="3" placeholder="Apa pendapat Anda tentang berita ini?" required></textarea>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-danger px-4">Kirim Komentar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="commentList" class="d-flex flex-column gap-4">
+                        <div class="d-flex gap-3">
+                            <div class="comment-avatar flex-shrink-0">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div>
+                                <div class="d-flex align-items-center mb-1">
+                                    <h6 class="fw-bold mb-0 me-2">Andi Pratama</h6>
+                                    <small class="text-muted" style="font-size: 0.8rem;">1 jam yang lalu</small>
+                                </div>
+                                <p class="mb-0 text-secondary">Sangat setuju dengan kebijakan ini. Sudah saatnya kita peduli pada lingkungan jangka panjang.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <div class="comment-avatar flex-shrink-0">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div>
+                                <div class="d-flex align-items-center mb-1">
+                                    <h6 class="fw-bold mb-0 me-2">Siti Aminah</h6>
+                                    <small class="text-muted" style="font-size: 0.8rem;">30 menit yang lalu</small>
+                                </div>
+                                <p class="mb-0 text-secondary">Semoga pengawasannya ketat, jangan sampai dana besarnya dikorupsi lagi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="bg-white p-4 rounded shadow-sm border mb-4 sticky-top" style="top: 100px; z-index: 1;">
+                    <h5 class="fw-bold mb-4 border-start border-4 border-danger ps-3">Berita Terkait</h5>
+                    
+                    <div class="d-flex flex-column gap-3">
+                        <div class="d-flex gap-3 related-news-item align-items-center">
+                            <img src="https://picsum.photos/200/200?random=1" alt="Thumbnail">
+                            <div>
+                                <small class="text-danger fw-bold" style="font-size: 0.7rem;">EKONOMI</small>
+                                <h6 class="mb-0 mt-1 line-clamp-2"><a href="#" class="text-decoration-none text-dark fw-bold">Anggaran APBN 2024 Difokuskan untuk Pembangunan Daerah 3T</a></h6>
+                            </div>
+                        </div>
+                        <hr class="my-1 text-muted opacity-25">
+                        
+                        <div class="d-flex gap-3 related-news-item align-items-center">
+                            <img src="https://picsum.photos/200/200?random=2" alt="Thumbnail">
+                            <div>
+                                <small class="text-danger fw-bold" style="font-size: 0.7rem;">TEKNOLOGI</small>
+                                <h6 class="mb-0 mt-1 line-clamp-2"><a href="#" class="text-decoration-none text-dark fw-bold">Teknologi Panel Surya Terbaru Lebih Efisien dan Murah</a></h6>
+                            </div>
+                        </div>
+                        <hr class="my-1 text-muted opacity-25">
+
+                        <div class="d-flex gap-3 related-news-item align-items-center">
+                            <img src="https://picsum.photos/200/200?random=3" alt="Thumbnail">
+                            <div>
+                                <small class="text-danger fw-bold" style="font-size: 0.7rem;">NASIONAL</small>
+                                <h6 class="mb-0 mt-1 line-clamp-2"><a href="#" class="text-decoration-none text-dark fw-bold">Presiden Resmikan Bendungan Baru di Jawa Tengah</a></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top text-center">
+                        <a href="#" class="btn btn-outline-danger w-100 btn-sm">Lihat Berita Lainnya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="fw-bold mb-3">BeritaNusantara</h4>
+                    <p class="text-secondary small">Menyajikan berita terkini, akurat, dan terpercaya dari seluruh pelosok negeri. Kami berkomitmen memberikan informasi mendidik.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-twitter-x fs-5"></i></a>
+                        <a href="https://www.instagram.com/raiyhan_rr/" class="text-light"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="https://www.instagram.com/dvn.ad/" class="text-light"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-3">Kategori</h5>
+                    <ul class="list-unstyled text-secondary small">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Nasional</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Internasional</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Ekonomi</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Teknologi</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-3">Hubungi Kami</h5>
+                    <ul class="list-unstyled text-secondary small">
+                        <li class="mb-2 d-flex"><i class="bi bi-geo-alt me-2 text-danger"></i> Gedung Pers, Jl. Kebon Sirih No. 12, Jakarta</li>
+                        <li class="mb-2 d-flex"><i class="bi bi-telephone me-2 text-danger"></i> +62 21 555 0123</li>
+                        <li class="mb-2 d-flex"><i class="bi bi-envelope me-2 text-danger"></i> redaksi@beritanusantara.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-secondary mt-4">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <small class="text-secondary">&copy; 2024 BeritaNusantara. Hak Cipta Dilindungi.</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-secondary text-decoration-none small me-3">Privacy Policy</a>
+                    <a href="#" class="text-secondary text-decoration-none small">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- LOGIKA PENCARIAN (SAMA DENGAN HOME) ---
+        function handleSearch(event) {
+            event.preventDefault();
+            const input = document.getElementById('searchInput').value;
+            if(input.trim() !== "") {
+                alert('Mencari berita: ' + input);
+            } else {
+                alert('Silakan masukkan kata kunci pencarian.');
+            }
+        }
+
+        // --- LOGIKA KOMENTAR BARU ---
+        function postComment(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            // 1. Ambil nilai dari input
+            const nameInput = document.getElementById('commentName');
+            const textInput = document.getElementById('commentText');
+            const name = nameInput.value;
+            const text = textInput.value;
+            const list = document.getElementById('commentList');
+            const countSpan = document.getElementById('commentCount');
+
+            // 2. Buat elemen HTML baru untuk komentar
+            const newComment = document.createElement('div');
+            newComment.className = 'd-flex gap-3 fade-in'; // fade-in animasi optional
+            newComment.innerHTML = `
+                <div class="comment-avatar flex-shrink-0">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center mb-1">
+                        <h6 class="fw-bold mb-0 me-2">${name}</h6>
+                        <small class="text-danger fw-bold" style="font-size: 0.8rem;">Baru Saja</small>
+                    </div>
+                    <p class="mb-0 text-secondary">${text}</p>
+                </div>
+            `;
+
+            // 3. Masukkan ke paling atas daftar komentar
+            list.prepend(newComment);
+
+            // 4. Reset form
+            nameInput.value = '';
+            textInput.value = '';
+
+            // 5. Update jumlah komentar
+            let currentCount = parseInt(countSpan.innerText);
+            countSpan.innerText = currentCount + 1;
+
+            alert('Komentar berhasil dikirim!');
+        }
+    </script>
+</body>
+</html>
