@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil & Pengaturan - BeritaNusantara</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body { 
+            background-color: #f3f4f6; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Avatar Upload Styling */
+        .avatar-upload {
+            position: relative;
+            max-width: 150px;
+            margin: 0 auto;
+        }
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .avatar-edit {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        .avatar-edit label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #dc3545; /* Merah */
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .avatar-edit label:hover {
+            background: #bb2d3b;
+            transform: scale(1.1);
+        }
+
+        /* Sidebar Menu Styling */
+        .list-group-item {
+            border: none;
+            padding: 12px 20px;
+            color: #6c757d;
+            font-weight: 500;
+            border-radius: 8px !important;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+        }
+        .list-group-item:hover {
+            background-color: #e9ecef;
+            color: #212529;
+        }
+        .list-group-item.active {
+            background-color: #dc3545; /* Merah */
+            color: white;
+            font-weight: 600;
+        }
+        .list-group-item.active i {
+            color: white;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+        }
+
+        /* Main Content expands */
+        main { flex: 1; }
+    </style>
+</head>
+<body>
+
+   <nav class="navbar navbar-dark mb-4 sticky-top shadow-sm"style="background-color: #b91c1c;">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">Editor <span class="text-danger">inIBerita</span></span>
+                <div class="d-flex align-items-center gap-3">
+                    <a href="editorPage.html" class="btn btn-sm btn-light fw-bold text-danger shadow-sm rounded-1">
+                        <i class="bi bi-arrow-left me-2"></i>Kembali ke Dashboard
+                    </a>
+                </div>
+        </div>
+    </nav>
+
+    <main class="container pb-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-3 col-md-4">
+                <div class="card mb-4 text-center p-4">
+                    <img src="https://picsum.photos/id/64/200/200" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Avatar">
+                    <h5 class="fw-bold mb-0">Ja'far Shidiq</h5>
+                    <small class="text-secondary">Chief Editor</small>
+                </div>
+
+                <div class="card p-3">
+                    <div class="list-group list-group-flush" id="profileTabs" role="tablist">
+                        <button class="list-group-item list-group-item-action active" data-bs-toggle="pill" data-bs-target="#tab-profil">
+                            <i class="bi bi-person me-2"></i> Edit Profil
+                        </button>
+                        <button class="list-group-item list-group-item-action" data-bs-toggle="pill" data-bs-target="#tab-keamanan">
+                            <i class="bi bi-shield-lock me-2"></i> Password & Keamanan
+                        </button>
+                        <button class="list-group-item list-group-item-action" data-bs-toggle="pill" data-bs-target="#tab-notifikasi">
+                            <i class="bi bi-bell me-2"></i> Notifikasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="tab-content">
+                    
+                    <div class="tab-pane fade show active" id="tab-profil">
+                        <div class="card p-4 p-md-5">
+                            <h4 class="fw-bold mb-4">Informasi Pribadi</h4>
+                            
+                            <form onsubmit="handleSave(event, 'Profil')">
+                                <div class="avatar-upload mb-4">
+                                    <img src="https://picsum.photos/id/64/300/300" id="avatarPreview" class="avatar-preview">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" hidden onchange="previewAvatar(this)" />
+                                        <label for="imageUpload"><i class="bi bi-camera-fill"></i></label>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Nama Lengkap</label>
+                                        <input type="text" class="form-control" value="Ja'far Abdurrahman Shidiq">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Username</label>
+                                        <input type="text" class="form-control" value="jafar_editor" readonly> </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Email</label>
+                                        <input type="email" class="form-control" value="jafar@beritanusantara.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">No. Telepon</label>
+                                        <input type="text" class="form-control" value="+62 812 3456 7890">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold small">Bio Singkat</label>
+                                        <textarea class="form-control" rows="4">Jurnalis teknologi yang bersemangat meliput perkembangan AI dan Startup di Indonesia.</textarea>
+                                        <div class="form-text">Bio ini akan muncul di bawah setiap artikel yang Anda tulis.</div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 text-end">
+                                    <button type="submit" class="btn btn-danger px-4 fw-bold">Simpan Perubahan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-keamanan">
+                        <div class="card p-4 p-md-5">
+                            <h4 class="fw-bold mb-4">Ganti Password</h4>
+                            
+                            <form onsubmit="handleSave(event, 'Password')">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small">Password Sekarang</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Password Baru</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Konfirmasi Password Baru</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+                                
+                                <h5 class="fw-bold mb-3">Autentikasi Dua Faktor (2FA)</h5>
+                                <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded">
+                                    <div>
+                                        <p class="mb-0 fw-bold">Aktifkan 2FA</p>
+                                        <small class="text-secondary">Tambah keamanan ekstra menggunakan aplikasi Google Authenticator.</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" style="width: 3em; height: 1.5em;">
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 text-end">
+                                    <button type="submit" class="btn btn-danger px-4 fw-bold">Update Keamanan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-notifikasi">
+                        <div class="card p-4 p-md-5">
+                            <h4 class="fw-bold mb-4">Preferensi Notifikasi</h4>
+                            
+                            <form onsubmit="handleSave(event, 'Preferensi')">
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-3 text-secondary text-uppercase" style="font-size: 0.8rem;">Notifikasi Email</h6>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="notif1" checked>
+                                        <label class="form-check-label" for="notif1">
+                                            Komentar Baru
+                                            <small class="d-block text-muted">Kirim email ketika ada yang mengomentari artikel saya.</small>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="notif2" checked>
+                                        <label class="form-check-label" for="notif2">
+                                            Berita Trending
+                                            <small class="d-block text-muted">Rekap mingguan berita yang paling banyak dibaca.</small>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="mt-4">
+                                    <h6 class="fw-bold mb-3 text-danger">Danger Zone</h6>
+                                    <div class="d-flex justify-content-between align-items-center border border-danger p-3 rounded bg-danger bg-opacity-10">
+                                        <div>
+                                            <p class="mb-0 fw-bold text-danger">Hapus Akun</p>
+                                            <small class="text-danger">Tindakan ini tidak dapat dibatalkan. Semua data akan hilang.</small>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-outline-danger bg-white" onclick="confirmDelete()">Hapus Akun</button>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 text-end">
+                                    <button type="submit" class="btn btn-secondary px-4 fw-bold">Simpan Preferensi</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-secondary py-4 mt-5 border-top">   
+        <div class="container text-center">
+            <small class="text-white">&copy; 2024 BeritaNusantara Admin Panel.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 1. Script Preview Avatar saat diganti
+        function previewAvatar(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarPreview').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // 2. Script Mockup Simpan Data
+        function handleSave(e, type) {
+            e.preventDefault(); // Mencegah reload
+            // Di sini nanti logika Ajax ke database
+            alert('Sukses! Data ' + type + ' berhasil disimpan.');
+        }
+
+        // 3. Script Hapus Akun
+        function confirmDelete() {
+            if(confirm("Apakah Anda yakin ingin menghapus akun ini secara permanen?")) {
+                alert("Akun dijadwalkan untuk dihapus.");
+            }
+        }
+    </script>
+
+</body>
+</html

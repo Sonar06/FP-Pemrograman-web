@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Website - BeritaNusantara</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body { 
+            background-color: #f3f4f6; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sidebar Menu Styling */
+        .settings-nav .nav-link {
+            color: #495057;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .settings-nav .nav-link:hover {
+            background-color: #e9ecef;
+        }
+        .settings-nav .nav-link.active {
+            background-color: #dc3545; /* Merah */
+            color: white;
+            box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3);
+        }
+        .settings-nav .nav-link.active i { color: white; }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Logo Preview Box */
+        .logo-preview-box {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .logo-preview-box:hover {
+            border-color: #dc3545;
+            background-color: #fff5f5;
+        }
+        .logo-preview-box img {
+            max-height: 100px;
+            max-width: 100%;
+        }
+
+        main { flex: 1; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark mb-4 sticky-top shadow-sm"style="background-color: #b91c1c;">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1"> Editor<span class="text-white"> inIBerita</span></span>
+            <div class="d-flex align-items-center gap-3">
+                    <a href="editorPage.html" class="btn btn-sm btn-light fw-bold text-danger shadow-sm rounded-1">
+                        <i class="bi bi-arrow-left me-2"></i>Kembali ke Dashboard
+                    </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container pb-5">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h3 class="fw-bold">Konfigurasi Website</h3>
+                <p class="text-secondary">Kelola identitas, tampilan, dan informasi kontak website utama.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-4">
+                <div class="card p-3">
+                    <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-umum" type="button">
+                            <span><i class="bi bi-globe2 me-2"></i> Identitas Umum</span>
+                            <i class="bi bi-chevron-right small"></i>
+                        </button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-tampilan" type="button">
+                            <span><i class="bi bi-palette me-2"></i> Logo & Tampilan</span>
+                            <i class="bi bi-chevron-right small"></i>
+                        </button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-kontak" type="button">
+                            <span><i class="bi bi-envelope me-2"></i> Kontak & Sosmed</span>
+                            <i class="bi bi-chevron-right small"></i>
+                        </button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-sistem" type="button">
+                            <span><i class="bi bi-gear me-2"></i> Sistem & Maintenance</span>
+                            <i class="bi bi-chevron-right small"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <form onsubmit="handleSave(event)">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        
+                        <div class="tab-pane fade show active" id="tab-umum">
+                            <div class="card p-4 p-md-5">
+                                <h5 class="fw-bold mb-4 border-bottom pb-2">Identitas Website</h5>
+                                
+                                <div class="row g-4">
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold small">Nama Website</label>
+                                        <input type="text" class="form-control" value="BeritaNusantara">
+                                        <div class="form-text">Nama ini akan muncul di Tab Browser dan Judul Halaman.</div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold small">Deskripsi Singkat (Meta Description)</label>
+                                        <textarea class="form-control" rows="3">Portal berita terkini, akurat, dan terpercaya dari seluruh pelosok negeri. Menyajikan informasi nasional, ekonomi, dan teknologi.</textarea>
+                                        <div class="form-text">Penting untuk SEO (Pencarian Google).</div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Teks Copyright Footer</label>
+                                        <input type="text" class="form-control" value="© 2024 BeritaNusantara. Hak Cipta Dilindungi.">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-tampilan">
+                            <div class="card p-4 p-md-5">
+                                <h5 class="fw-bold mb-4 border-bottom pb-2">Logo & Favicon</h5>
+
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Logo Website</label>
+                                        <div class="logo-preview-box mb-2" onclick="document.getElementById('logoInput').click()">
+                                            <img src="https://via.placeholder.com/150x50?text=LOGO+WEB" id="logoPreview" alt="Logo">
+                                        </div>
+                                        <input type="file" id="logoInput" hidden onchange="previewLogo(this, 'logoPreview')">
+                                        <div class="text-center"><small class="text-muted">Klik kotak untuk ganti. Format PNG transparan.</small></div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Favicon (Ikon Tab Browser)</label>
+                                        <div class="logo-preview-box mb-2" onclick="document.getElementById('favInput').click()">
+                                            <img src="https://via.placeholder.com/32x32?text=I" id="favPreview" style="width: 32px; height: 32px;" alt="Favicon">
+                                        </div>
+                                        <input type="file" id="favInput" hidden onchange="previewLogo(this, 'favPreview')">
+                                        <div class="text-center"><small class="text-muted">Ukuran disarankan 32x32 pixel.</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-kontak">
+                            <div class="card p-4 p-md-5">
+                                <h5 class="fw-bold mb-4 border-bottom pb-2">Informasi Kontak</h5>
+                                
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Email Redaksi</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+                                            <input type="email" class="form-control" value="redaksi@beritanusantara.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Nomor Telepon/WhatsApp</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="bi bi-whatsapp"></i></span>
+                                            <input type="text" class="form-control" value="+62 21 555 0123">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold small">Alamat Kantor</label>
+                                        <textarea class="form-control" rows="2">Gedung Pers, Jl. Kebon Sirih No. 12, Jakarta Pusat, Indonesia</textarea>
+                                    </div>
+                                </div>
+
+                                <h5 class="fw-bold mb-3 border-bottom pb-2">Media Sosial</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Facebook URL</label>
+                                        <input type="text" class="form-control" placeholder="https://facebook.com/..." value="https://facebook.com/beritanusantara">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Twitter/X URL</label>
+                                        <input type="text" class="form-control" placeholder="https://twitter.com/..." value="https://twitter.com/beritanusantara">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">Instagram URL</label>
+                                        <input type="text" class="form-control" placeholder="https://instagram.com/..." value="https://instagram.com/beritanusantara">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small">YouTube URL</label>
+                                        <input type="text" class="form-control" placeholder="https://youtube.com/..." value="https://youtube.com/beritanusantara">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-sistem">
+                            <div class="card p-4 p-md-5">
+                                <h5 class="fw-bold mb-4 border-bottom pb-2">Pengaturan Sistem</h5>
+                                
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Mode Maintenance (Perbaikan)</h6>
+                                        <p class="text-secondary small mb-0">Jika aktif, pengunjung hanya akan melihat halaman "Sedang dalam perbaikan". Admin tetap bisa login.</p>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" style="width: 3em; height: 1.5em;">
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Izinkan Komentar Publik</h6>
+                                        <p class="text-secondary small mb-0">Jika dimatikan, kolom komentar akan hilang di seluruh berita.</p>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" style="width: 3em; height: 1.5em;" checked>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Moderasi Komentar Otomatis</h6>
+                                        <p class="text-secondary small mb-0">Komentar harus disetujui admin sebelum tampil.</p>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" style="width: 3em; height: 1.5em;" checked>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 pb-5 d-flex justify-content-end">
+                        <button type="button" class="btn btn-light border me-2">Batal</button>
+                        <button type="submit" class="btn btn-danger px-4 fw-bold shadow-sm"><i class="bi bi-save me-2"></i>Simpan Konfigurasi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-secondary py-4 mt-5 border-top">
+        <div class="container text-center">
+            <small class="text-white">&copy; 2024 BeritaNusantara Admin Panel.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fungsi Simulasi Simpan
+        function handleSave(event) {
+            event.preventDefault();
+            // Efek loading
+            const btn = document.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Menyimpan...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert('Pengaturan Website berhasil diperbarui!');
+            }, 1000);
+        }
+
+        // Fungsi Preview Gambar Logo
+        function previewLogo(input, previewId) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(previewId).src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
