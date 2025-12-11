@@ -45,19 +45,41 @@ $news = $result->fetch_assoc();
         }
 </style>
 </head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" style="background-color: #b91c1c;">
-    <div class="container">
-        <a class="navbar-brand fw-bold fs-3" href="index.php">
-            <span>inIBerita</span>
-        </a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm" style="background-color: #b91c1c;">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.php">
+                <span>inIBerita</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium">
+                    <li class="nav-item"><a class="nav-link active text-white" href="index.php">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=business">Bisnis</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=sports">Olahraga</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=health">Kesehatan</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=technology">Teknologi</a></li>
+                </ul>
+                
+                <form class="d-flex ms-lg-3">
+                    <div class="input-group">
+                        <input class="form-control rounded-start-pill" placeholder="Cari berita...">
+                        <button class="btn btn-light rounded-end-pill" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                    
+                <a href="login.html" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>
+            </div>
+        </div>
+    </nav>
 
 <div class="container py-5">
 
