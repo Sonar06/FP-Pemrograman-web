@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -132,14 +133,30 @@ if ($category) {
                         </button>
                     </div>
                 </form>
-                
-                <a href="login.html" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>
+
+                <?php if (isset($_SESSION['role']) && ($_SESSION['role'] == 'author' || $_SESSION['role'] == 'admin')): ?>
+    
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-light text-danger fw-bold d-none d-md-block" href="halaman_penulis.php" style="margin-left: 15px;">
+                            <i></i> Tulis Berita
+                        </a>
+                    </li>
+
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['username'])): ?>
+
+                    <a href="logout.php" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Keluar</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>     
+
+                <?php endif; ?>
+
             </div>
         </div>
     </nav>
 
     <div class="container py-4">
-        <?php if ($hero): ?>
         <!-- BERITA UTAMA -->
         <h2 class="mb-4 border-start border-4 border-danger ps-3 fw-bold">Berita Utama</h2>
         
@@ -166,7 +183,6 @@ if ($category) {
                 </a>
             </div>
         </div>
-        <?php endif; ?>
         <!-- TERKINI -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="border-start border-4 border-danger ps-3 fw-bold m-0">Terkini</h2>
@@ -247,4 +263,3 @@ if ($category) {
 
 </body>
 </html>
-

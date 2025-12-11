@@ -106,20 +106,30 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="card">
+            <h1 class="title">LOGIN</h1>
 
-<div class="container">
-    <div class="card">
-        <h1 class="title">LOGIN</h1>
-        <form>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>       
-            <a href="homePage.html"><button type="submit"class="btn">Login</button></a>
-            <div class="join-text">
-                <p class="text">Dont have</p>
-                <a href="daftar.html" class="forgot">account?</a>
-            </div>
-        </form>
+            <form action="../private/proses_login.php" method="POST">
+                
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>       
+                
+                <?php 
+                if(isset($_GET['pesan'])){
+                    if($_GET['pesan'] == "gagal"){
+                        echo "<div class='alert' style='color:white; font-weight:semi-bold;'>Username atau Password salah!</div>";
+                    }
+                }
+                ?>
+                <button type="submit" class="btn">Login</button>
+                
+                <div class="join-text">
+                    <span class="text">Belum punya akun?</span>
+                    <a href="daftar.html" class="forgot">Daftar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>
