@@ -4,20 +4,36 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . "/../config/db.php";
 
-$categoryFilter = isset($_GET['category']) ? $_GET['category'] : null;
+$category = isset($_GET['category']) ? $_GET['category'] : null;
 
-$hero = $conn->query("SELECT * FROM articles ORDER BY published_at DESC LIMIT 1")->fetch_assoc();
-$heroId = $hero['id'];
+$hero = null;
+$heroId = 0;
 
-if ($categoryFilter) {
-    $stmt = $conn->prepare("SELECT * FROM articles WHERE category = ? AND id != $heroId ORDER BY published_at DESC LIMIT 6");
-    $stmt->bind_param("s", $categoryFilter);
-    $stmt->execute();
-    $result = $stmt->get_result();
+if ($category) {
+    $stmtHero = $conn->prepare("SELECT * FROM articles WHERE category = ? ORDER BY published_at DESC LIMIT 1");
+    $stmtHero->bind_param("s", $category);
+    $stmtHero->execute();
+    $hero = $stmtHero->get_result()->fetch_assoc();
 } else {
-    $result = $conn->query("SELECT * FROM articles WHERE id != $heroId ORDER BY published_at DESC LIMIT 3");
+    $queryHero = $conn->query("SELECT * FROM articles ORDER BY published_at DESC LIMIT 1");
+    $hero = $queryHero->fetch_assoc();
 }
 
+if ($hero) {
+    $heroId = $hero['id'];
+}
+
+if ($category) {
+    $stmtList = $conn->prepare("SELECT * FROM articles WHERE category = ? AND id != ? ORDER BY published_at DESC LIMIT 6");
+    $stmtList->bind_param("si", $category, $heroId);
+    $stmtList->execute();
+    $result = $stmtList->get_result();
+} else {
+    $stmtList = $conn->prepare("SELECT * FROM articles WHERE id != ? ORDER BY published_at DESC LIMIT 6");
+    $stmtList->bind_param("i", $heroId);
+    $stmtList->execute();
+    $result = $stmtList->get_result();
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +41,7 @@ if ($categoryFilter) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeritaNusantara - Portal Berita Terkini</title>
+    <title>inIBerita- Portal Berita Terkini</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -102,9 +118,9 @@ if ($categoryFilter) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium">
                     <li class="nav-item"><a class="nav-link active text-white" href="index.php">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=nation">Nasional</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=world">Internasional</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=business">Ekonomi</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=business">Bisnis</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=sports">Olahraga</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?category=health">Kesehatan</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?category=technology">Teknologi</a></li>
                 </ul>
                 
@@ -123,7 +139,7 @@ if ($categoryFilter) {
     </nav>
 
     <div class="container py-4">
-        <?php if (!$categoryFilter && $hero): ?>
+        <?php if ($hero): ?>
         <!-- BERITA UTAMA -->
         <h2 class="mb-4 border-start border-4 border-danger ps-3 fw-bold">Berita Utama</h2>
         
