@@ -126,7 +126,7 @@
                 
                 <div class="join-text">
                     <span class="text">Belum punya akun?</span>
-                    <a href="daftar.html" class="forgot">Daftar</a>
+                    <a href="daftar.php" class="forgot">Daftar</a>
                 </div>
             </form>
         </div>

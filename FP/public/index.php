@@ -134,13 +134,17 @@ if ($category) {
                     </div>
                 </form>
 
-                <?php if (isset($_SESSION['role']) && ($_SESSION['role'] == 'author' || $_SESSION['role'] == 'admin')): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'author'): ?>
     
                     <li class="nav-item">
                         <a class="btn btn-sm btn-light text-danger fw-bold d-none d-md-block" href="halaman_penulis.php" style="margin-left: 15px;">
                             <i></i> Tulis Berita
                         </a>
                     </li>
+                <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i>
+                    </button>
 
                 <?php endif; ?>
 

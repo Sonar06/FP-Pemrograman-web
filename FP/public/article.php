@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . "/../config/db.php";
 $id = $_GET['id'] ?? 0;
 
@@ -12,6 +13,19 @@ if ($result->num_rows === 0) {
     die("<h2>Berita tidak ditemukan.</h2>");
 }
 $news = $result->fetch_assoc();
+
+$article_id = $_GET['id']; 
+
+$sql_komen = "SELECT comments.*, users.username 
+              FROM comments 
+              JOIN users ON comments.user_id = users.id 
+              WHERE comments.article_id = ? 
+              ORDER BY comments.created_at DESC";
+
+$stmt = $conn->prepare($sql_komen);
+$stmt->bind_param("i", $article_id);
+$stmt->execute();
+$result_komen = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +90,13 @@ $news = $result->fetch_assoc();
                     </div>
                 </form>
                     
-                <a href="login.html" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>
+                <?php if (isset($_SESSION['username'])): ?>
+
+                    <a href="logout.php" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Keluar</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-link text-decoration-none text-white ms-2 fw-bold">Masuk</a>     
+
+                <?php endif; ?>
             </div>
         </div>
     </nav>
@@ -145,23 +165,64 @@ $news = $result->fetch_assoc();
                 <?php endwhile; ?>
                 
             </div>
-            <div class="bg-white p-4 rounded shadow-sm border mt-5" id="comment-section" style="max-height: 500px; overflow-y: auto;">
-                <h5 class="fw-bold mb-4 border-start border-4 border-danger ps-3">Tulis Komentar</h5>
+            <div class="bg-white p-4 rounded shadow-sm border mt-5" id="comment-section" style="max-height: 800px; overflow-y: auto;">
+    
+                <h5 class="fw-bold mb-4 border-start border-4 border-danger ps-3">Komentar (<?= $result_komen->num_rows ?>)</h5>
 
-                <form id="commentForm" onsubmit="postComment(event)">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="commentName" placeholder="Nama Anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" id="commentText" rows="4" placeholder="Tulis komentar..." required></textarea>
-                    </div>
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-danger">Kirim Komentar</button>
-                    </div>
-                </form>
+                <?php if(isset($_SESSION['username'])): ?>
+                    
+                    <form action="../private/proses_komentar.php" method="POST">
+                        <input type="hidden" name="article_id" value="<?= $article_id ?>">
 
-                <div id="commentList" class="mt-4 d-flex flex-column gap-3">
-                    <!-- komentar baru akan muncul di sini -->
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Komentar sebagai: <strong><?= $_SESSION['username'] ?></strong></label>
+                            <textarea name="isi_komentar" class="form-control" rows="4" placeholder="Tulis komentar..." required></textarea>
+                        </div>
+                        
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-danger">Kirim Komentar</button>
+                        </div>
+                    </form>
+
+                <?php else: ?>
+                    
+                    <div class="alert alert-light border text-center">
+                        Silakan <a href="login.php" class="fw-bold text-danger text-decoration-none">Masuk (Login)</a> untuk menulis komentar.
+                    </div>
+
+                <?php endif; ?>
+
+
+                <div id="commentList" class="mt-4 d-flex flex-column gap-3" style="max-height: 200px; overflow-y: auto;">
+                    
+                    <?php if($result_komen->num_rows > 0): ?>
+                        <?php while($komen = $result_komen->fetch_assoc()): ?>
+                            
+                            <div class="d-flex border-bottom pb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center text-secondary fw-bold" style="width: 40px; height: 40px;">
+                                        <?= strtoupper(substr($komen['username'], 0, 1)) ?>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-1">
+                                        <?= htmlspecialchars($komen['username']) ?>
+                                        <small class="text-muted fw-normal ms-2" style="font-size: 0.8rem;">
+                                            <?= date('d M Y, H:i', strtotime($komen['created_at'])) ?>
+                                        </small>
+                                    </h6>
+                                    <p class="mb-0 text-secondary" style="font-size: 0.95rem;">
+                                        <?= nl2br(htmlspecialchars($komen['comment_text'])) ?>
+                                    </p>
+                                </div>
+                            </div>
+
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p class="text-center text-muted small py-3">Belum ada komentar. Jadilah yang pertama berkomentar!</p>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>

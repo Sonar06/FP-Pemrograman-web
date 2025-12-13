@@ -60,9 +60,7 @@
                 </a>
                 <span class="text-white small border-start ps-3 ms-2">Halo, Editor</span>
                 <div class="dropdown">
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i>
-                    </button>
+                    
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="profile.html">Profil</a></li>
                         <li><a class="dropdown-item" href="setting.html">Pengaturan</a></li>
@@ -74,123 +72,101 @@
         </div>
     </nav>
 
+    <?php if (isset($_GET['pesan'])): ?>
+
+        <?php if ($_GET['pesan'] == 'uploaded'): ?>
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                <h4 class="alert-heading"><i class="bi bi-check-circle-fill me-2"></i>Berhasil!</h4>
+                <p>Berita baru Anda telah berhasil disimpan dan diterbitkan ke database.</p>
+                <hr>
+                <p class="mb-0 small">
+                    Silakan cek di <a href="index.php" class="alert-link">Halaman Depan</a> untuk melihat hasilnya.
+                </p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        <?php elseif ($_GET['pesan'] == 'failed'): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon-fill me-2"></i>
+                <strong>Gagal!</strong> Terjadi kesalahan saat menyimpan berita. Coba cek koneksi atau input Anda.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+    <?php endif; ?>
     <main class="container pb-5">
-        <form action="#" method="POST" enctype="multipart/form-data">
+
+        <form action="../private/proses_tambahberita.php" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
                 
                 <div class="col-lg-8">
-                    
                     <div class="editor-container p-4 mb-4">
                         <div class="mb-4">
                             <label class="form-label fw-bold">Judul Berita</label>
-                            <input type="text" class="form-control form-control-lg" value="Pembangunan Infrastruktur Hijau Menjadi Prioritas" id="titleInput" onkeyup="generateSlug()">
+                            <input type="text" name="title" class="form-control form-control-lg" placeholder="Judul..." required>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label text-muted small">Permalink (Slug):</label>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text bg-light">beritanusantara.com/berita/</span>
-                                <input type="text" class="form-control bg-light text-secondary" id="slugInput" value="pembangunan-infrastruktur-hijau-menjadi-prioritas" readonly>
+                                <input type="text" name="slug" class="form-control bg-light text-secondary" placeholder="judul-berita-anda" required>
                             </div>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Deskripsi Singkat (Excerpt)</label>
-                            <textarea class="form-control" rows="3" placeholder="Tulis ringkasan singkat berita ini untuk tampilan di halaman depan (Max 150 karakter)...">Pemerintah menjadikan infrastruktur hijau sebagai prioritas utama dalam RPJMN tahun ini demi keberlanjutan lingkungan.</textarea>
-                            <div class="form-text text-muted small">Deskripsi ini akan muncul di kartu berita halaman depan dan hasil pencarian Google.</div>
+                            <label class="form-label fw-bold">Deskripsi Singkat</label>
+                            <textarea name="description" class="form-control" rows="3" maxlength="150" required></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Isi Berita</label>
-                            <textarea class="form-control" id="editor-area">Pemerintah secara resmi mengumumkan bahwa pembangunan infrastruktur berbasis lingkungan...</textarea>
+                            <textarea name="content" class="form-control" id="editor-area" rows="10" required></textarea>
                         </div>
                     </div>
-
-                    <div class="editor-container p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                            <h5 class="fw-bold m-0"><i class="bi bi-chat-left-text me-2"></i>Komentar Pembaca</h5>
-                            <span class="badge bg-danger">2 Komentar Masuk</span>
-                        </div>
-
-                        <div class="btn-group btn-group-sm mb-3">
-                            <button type="button" class="btn btn-outline-secondary active">Semua</button>
-                            <button type="button" class="btn btn-outline-warning">Pending (1)</button>
-                            <button type="button" class="btn btn-outline-success">Disetujui (1)</button>
-                        </div>
-
-                        <div class="d-flex flex-column gap-3">
-                            
-                            <div class="card border-0 shadow-sm comment-item comment-pending p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex gap-3">
-                                        <div class="avatar-small flex-shrink-0"><i class="bi bi-person"></i></div>
-                                        <div>
-                                            <h6 class="fw-bold mb-1">Rudi Hartono <span class="badge bg-warning text-dark ms-2" style="font-size: 0.6rem;">PENDING</span></h6>
-                                            <small class="text-muted d-block mb-2">rudihartono@gmail.com &bull; 10 Menit lalu</small>
-                                            <p class="mb-0 text-dark small">"Apakah anggaran ini sudah transparan? Mohon redaksi bahas rinciannya."</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column gap-1">
-                                        <button type="button" class="btn btn-sm btn-success" title="Setujui"><i class="bi bi-check-lg"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" title="Hapus"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card border-0 shadow-sm comment-item comment-approved p-3">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex gap-3">
-                                        <div class="avatar-small flex-shrink-0"><i class="bi bi-person-fill"></i></div>
-                                        <div>
-                                            <h6 class="fw-bold mb-1">Siti Aminah <span class="badge bg-success ms-2" style="font-size: 0.6rem;">DISETUJUI</span></h6>
-                                            <small class="text-muted d-block mb-2">siti.am@yahoo.com &bull; 1 Jam lalu</small>
-                                            <p class="mb-0 text-dark small">"Berita yang sangat informatif. Lanjutkan update pembangunannya min!"</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column gap-1">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" title="Balas"><i class="bi bi-reply"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" title="Hapus"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                    
                     </div>
-                </div>
 
                 <div class="col-lg-4">
                     <div class="editor-container p-4 mb-4">
                         <h6 class="fw-bold border-bottom pb-2 mb-3">Penerbitan</h6>
                         <div class="mb-3">
-                            <label class="form-label small fw-bold">Status</label>
-                            <select class="form-select">
-                                <option value="published" selected>Tayangkan (Publish)</option>
-                                <option value="draft">Simpan Konsep (Draft)</option>
-                                <option value="archived">Arsip</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label small fw-bold">Tanggal</label>
-                            <input type="datetime-local" class="form-control">
+                            <input type="datetime-local" name="published_at" class="form-control" required>
                         </div>
+ 
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-danger fw-bold"><i class="bi bi-save"></i> Update Berita</button>
+                            <button type="submit" class="btn btn-danger fw-bold"><i class="bi bi-save"></i> Simpan Berita</button>
                         </div>
                     </div>
 
                     <div class="editor-container p-4 mb-4">
                         <h6 class="fw-bold border-bottom pb-2 mb-3">Kategori</h6>
-                        <div class="form-check"><input class="form-check-input" type="radio" name="kategori" id="kat1" checked><label class="form-check-label" for="kat1">Nasional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="radio" name="kategori" id="kat2"><label class="form-check-label" for="kat2">Internasional</label></div>
-                        <div class="form-check"><input class="form-check-input" type="radio" name="kategori" id="kat3"><label class="form-check-label" for="kat3">Ekonomi</label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori" value="general" checked>
+                            <label class="form-check-label">General</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori" value="business">
+                            <label class="form-check-label">Bisnis</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori" value="sports">
+                            <label class="form-check-label">Olahraga</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori" value="health">
+                            <label class="form-check-label">Kesehatan</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori" value="technology">
+                            <label class="form-check-label">Teknologi</label>
+                        </div>
                     </div>
 
                     <div class="editor-container p-4">
                         <h6 class="fw-bold border-bottom pb-2 mb-3">Gambar Unggulan</h6>
-                        <div class="img-preview mb-3" id="imagePreview">
-                            <img src="https://picsum.photos/400/300" alt="Current Image">
-                        </div>
-                        <input class="form-control form-control-sm" type="file" id="imageInput" accept="image/*" onchange="previewImage()">
+                        <input class="form-control form-control-sm" type="file" name="image" accept="image/*" required>
                     </div>
                 </div>
             </div>
