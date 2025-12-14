@@ -198,12 +198,35 @@ $result = $stmtList->get_result();
     </div>
 
     <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <h4 class="fw-bold mb-3">inIBerita</h4>
+                <p class="text-secondary small">Menyajikan berita terkini dan akurat dari seluruh negeri.</p>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="fw-bold mb-3">Kategori</h5>
+                <ul class="list-unstyled text-secondary small">
+                    <li><a class="text-decoration-none text-secondary" href="index.php">Beranda</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="index.php?category=business">Bisnis</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="index.php?category=sports">Olahraga</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="index.php?category=health">Kesehatan</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="index.php?category=technology">Teknologi</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr class="border-secondary mt-4">
+   
         <div class="container text-center text-secondary small">
-            © 2024 BeritaNusantara
+            © 2025 inIBerita. All rights reserved.
         </div>
     </footer>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
         const searchInput = document.getElementById('searchInput');
         const newsContainer = document.getElementById('newsContainer');
         const heroContainer = document.getElementById('heroContainer');
