@@ -1,8 +1,10 @@
 <?php
 session_start();
-require_once __DIR__ . "/../config/db.php";
+require_once __DIR__ . "/../config/db.php"; 
+
 
 if (isset($_GET['ajax_search'])) {
+    // Set header JSON agar browser mengerti ini bukan HTML
     header('Content-Type: application/json');
 
     $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
@@ -10,10 +12,13 @@ if (isset($_GET['ajax_search'])) {
 
     try {
         if (!empty($keyword)) {
+            // Logika Pencarian
             $search = "%" . $keyword . "%";
+            // Cari di judul atau deskripsi
             $stmt = $conn->prepare("SELECT * FROM articles WHERE title LIKE ? OR description LIKE ? ORDER BY published_at DESC LIMIT 10");
             $stmt->bind_param("ss", $search, $search);
         } else {
+            // Jika keyword kosong, kembalikan data default (terbaru)
             $stmt = $conn->prepare("SELECT * FROM articles ORDER BY published_at DESC LIMIT 6");
         }
 
@@ -32,13 +37,11 @@ if (isset($_GET['ajax_search'])) {
     exit; 
 }
 
-
-
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 $hero = null;
 $heroId = 0;
 
-// Ambil Hero Article
+// Ambil Hero Article (Hanya jika tidak sedang search via URL biasa)
 if ($category) {
     $stmtHero = $conn->prepare("SELECT * FROM articles WHERE category = ? ORDER BY published_at DESC LIMIT 1");
     $stmtHero->bind_param("s", $category);
@@ -53,7 +56,7 @@ if ($hero) {
     $heroId = $hero['id'];
 }
 
-// Ambil List Artikel Awal
+// Ambil List Artikel Awal (Server Side Rendering)
 if ($category) {
     $stmtList = $conn->prepare("SELECT * FROM articles WHERE category = ? AND id != ? ORDER BY published_at DESC LIMIT 6");
     $stmtList->bind_param("si", $category, $heroId);
@@ -241,7 +244,7 @@ $result = $stmtList->get_result();
         searchInput.addEventListener('input', event => {
             const keyword = event.target.value;
 
-            // Sembunyikan Hero jika sedang mencari
+            // UI Logic: Sembunyikan Hero jika sedang mencari
             if(keyword.length > 0) {
                 if(heroContainer) heroContainer.style.display = 'none';
                 sectionTitle.innerText = `Hasil Pencarian: "${keyword}"`;
@@ -313,5 +316,4 @@ $result = $stmtList->get_result();
     </script>
 
 </body>
-
 </html>
